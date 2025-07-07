@@ -1,4 +1,4 @@
-python-telegram-bot==20.3
+python-telegram-bot[webhooks]==20.3
 Flask==2.3.2
 nest_asyncio==1.5.8
 psycopg2-binary
