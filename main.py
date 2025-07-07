@@ -14,8 +14,7 @@ from telegram.ext import (
 # ====================================
 # ✅ VARIÁVEIS DE AMBIENTE FIXAS
 # ====================================
-TOKEN = "7333842067:AAEynLOdFTnJeMRw-fhYhfU-UT0PFXoTduE
-"
+TOKEN = "7333842067:AAEynLOdFTnJeMRw-fhYhfU-UT0PFXoTduE"
 WEBHOOK_URL = "https://SEU_DOMINIO.onrender.com"
 
 CHAVE_PIX = "pattywatanabe@outlook.com"
