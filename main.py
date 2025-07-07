@@ -267,6 +267,17 @@ async def receber_email_cliente(update: Update, context: ContextTypes.DEFAULT_TY
 # ✅ FLASK & WEBHOOK
 # ====================================
 app_flask = Flask(__name__)
+
+@app_flask.route("/", methods=["GET"])
+def home():
+    return "Bot está online!"
+
+@app_flask.route("/webhook", methods=["POST"])
+def webhook():
+    update = Update.de_json(request.get_json(force=True), bot_app.bot)
+    bot_app.update_queue.put(update)
+    return "OK"
+    
 bot_app = ApplicationBuilder().token(TOKEN).build()
 
 bot_app.add_handler(CommandHandler("start", start))
@@ -297,15 +308,6 @@ conv_cliente = ConversationHandler(
 )
 bot_app.add_handler(conv_cliente)
 
-@app_flask.route("/", methods=["GET"])
-def home():
-    return "Bot está online!"
-
-@app_flask.route("/webhook", methods=["POST"])
-def webhook():
-    update = Update.de_json(request.get_json(force=True), bot_app.bot)
-    bot_app.update_queue.put(update)
-    return "OK"
 
 if __name__ == "__main__":
     import nest_asyncio
