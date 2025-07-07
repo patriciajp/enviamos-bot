@@ -275,7 +275,7 @@ def home():
 @app_flask.route("/webhook", methods=["POST"])
 def webhook():
     update = Update.de_json(request.get_json(force=True), bot_app.bot)
-    bot_app.update_queue.put(update)
+    bot_app.update_queue.put_nowait(update)
     return "OK"
     
 bot_app = ApplicationBuilder().token(TOKEN).build()
