@@ -14,16 +14,16 @@ from telegram.ext import (
 # ====================================
 # ✅ VARIÁVEIS DE AMBIENTE FIXAS
 # ====================================
-TOKEN = "7333842067:AAEynLOdFTnJeMRw-fhYhfU-UT0PFXoTduE"
-WEBHOOK_URL = "https://enviamos-bot.onrender.com"
+TOKEN = os.environ.get("TOKEN","7333842067:AAEynLOdFTnJeMRw-fhYhfU-UT0PFXoTduE")
+WEBHOOK_URL = os.environ.get("WEBHOOK_URL", "https://enviamos-bot.onrender.com")
 
-CHAVE_PIX = "pattywatanabe@outlook.com"
-URL_WHATSAPP = "https://wa.me/818030734889"
-URL_FORMULARIO = "https://forms.gle/SBV9vUrenLN7VELi6"
-VALOR_IENE_REAL = 0.039
-TAXA_SERVICO = 0.20
-BOT_USERNAME = "@Enviamosjpbot"
-GROUP_USERNAME = "@enviamos_jp"
+CHAVE_PIX = os.environ.get("CHAVE_PIX","pattywatanabe@outlook.com")
+URL_WHATSAPP = os.environ.get("URL_WHATSAPP", "https://wa.me/818030734889")
+URL_FORMULARIO = os.environ.get("URL_FORMULARIO","https://forms.gle/SBV9vUrenLN7VELi6")
+VALOR_IENE_REAL = float(os.environ.get("VALOR_IENE_REAL", 0.039))
+TAXA_SERVICO = float(os.environ.get("TAXA_SERVICO", 0.20))
+BOT_USERNAME = os.environ.get("BOT_USERNAME","@Enviamosjpbot")
+GROUP_USERNAME = os.environ.get("GROUP_USERNAME","@enviamos_jp") 
 ADMIN_IDS = [7968066840]
 
 # ====================================
@@ -185,9 +185,14 @@ async def ver_carrinho(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ])
         botoes.append([InlineKeyboardButton("❌ Cancelar item", callback_data=f"cancelar:{id_produto}")])
 
-    taxa = total_iene * TAXA_SERVICO
-    total = total_iene + taxa
-    texto += f"\n💼 Taxa serviço 20%: ¥{int(taxa)}\n✅ Total: ¥{int(total)} | R$ {total * VALOR_IENE_REAL:.2f}"
+    total_servico = total_iene * TAXA_SERVICO
+    total_final = total_iene + total_servico
+    total_real = total_final * VALOR_IENE_REAL
+
+    texto += "───────────────\n"
+    texto += f"\n🧾*Subtotal:* ¥{total_iene:,}".replace(",", ".") + f" | R$ {total_iene * VALOR_IENE_REAL:.2f}"
+    texto += f"\n💼*Taxa de serviço (20%):* ¥{int(total_servico):,}".replace(",", ".") + f" | R$ {total_servico * VALOR_IENE_REAL:.2f}"
+    texto += f"\n\n✅*Total: ¥{int(total_final):,}".replace(",", ".") + f" | R$ {total_real:.2f}*"
 
     botoes.append([
         InlineKeyboardButton("✅ Finalizar compra", callback_data="finalizar_compra"),
