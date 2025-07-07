@@ -313,6 +313,10 @@ if __name__ == "__main__":
     import nest_asyncio
     import asyncio
     nest_asyncio.apply()
-    asyncio.get_event_loop().run_until_complete(bot_app.bot.set_webhook(f"{WEBHOOK_URL}/webhook"))
-   
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(bot_app.initialize())
+    loop.run_until_complete(bot_app.start())
+    loop.run_until_complete(bot_app.bot.set_webhook(f"{WEBHOOK_URL}/webhook"))
+
     app_flask.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
