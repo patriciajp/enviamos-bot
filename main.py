@@ -108,6 +108,10 @@ def obter_carrinho_pg(user_id):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🛒 Olá! Use /carrinho para ver seus itens!")
 
+async def cancelar(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("❌ Operação cancelada!")
+    return ConversationHandler.END
+    
 async def cadastrar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id not in ADMIN_IDS:
         return
