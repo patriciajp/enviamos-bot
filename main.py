@@ -29,10 +29,10 @@ ADMIN_IDS = [7968066840]
 # ====================================
 # ✅ BANCO DE DADOS POSTGRESQL
 # ====================================
-DB_NAME = os.environ.get("DB_NAME", "SEU_DB_NAME")
-DB_USER = os.environ.get("DB_USER", "SEU_DB_USER")
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "SEU_DB_PASSWORD")
-DB_HOST = os.environ.get("DB_HOST", "SEU_DB_HOST")
+DB_NAME = os.environ.get("DB_NAME", "enviamosjp_db")
+DB_USER = os.environ.get("DB_USER", "enviamosjp_user")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "KH2ry19WxnF60qRQtRSVjdYYt8g9blCG")
+DB_HOST = os.environ.get("DB_HOST", "dpg-d1lmd96r433s73dta9p0-a")
 
 def conectar_db():
     return psycopg2.connect(
