@@ -277,8 +277,7 @@ def home():
 def webhook():
     data = request.get_json(force=True)
     print(">>> PAYLOAD RECEBIDO:", data)  # 👈 Veja isso no log!
-    update = Update.de_json(data, bot_app.bot)
-    bot_app.update_queue.put_nowait(update)
+  
     return "OK"
     
 bot_app = ApplicationBuilder().token(TOKEN).build()
