@@ -106,6 +106,7 @@ def obter_carrinho_pg(user_id):
 # ✅ COMANDOS PRINCIPAIS
 # ====================================
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print(">>> ENTROU NO START <<<")  # Veja no log
     await update.message.reply_text("🛒 Olá! Use /carrinho para ver seus itens!")
 
 async def cancelar(update: Update, context: ContextTypes.DEFAULT_TYPE):
